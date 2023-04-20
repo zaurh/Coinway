@@ -101,17 +101,12 @@ fun DetailScreen(
                             modifier = Modifier.fillMaxSize(),
                             verticalArrangement = Arrangement.Center
                         ) {
+
                             Text(
-                                text = coin.name,
-                                fontSize = 20.sp,
+                                text = "${coin.market_data.current_price.usd}$",
                                 fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                            Text(text = coin.symbol, color = Color.White)
-                            Text(
-                                text = coin.market_data.current_price.usd.toString(),
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
+                                color = Color.White,
+                                fontSize = 40.sp
                             )
 
                         }
