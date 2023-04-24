@@ -3,22 +3,23 @@ package com.example.zaurscoin
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.example.zaurscoin.domain.model.Coin
-import com.example.zaurscoin.domain.model.CoinList
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import com.google.accompanist.navigation.animation.composable
 import com.example.zaurscoin.presentation.screens.DetailScreen
 import com.example.zaurscoin.presentation.screens.MainScreen
 import com.example.zaurscoin.ui.theme.ZaursCoinTheme
-import com.google.gson.Gson
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,25 +31,93 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = colorResource(id = R.color.background)
                 ) {
-                    Navig()
+                    MyAnimatedNavigation()
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Navig(){
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "main"){
-        composable("main"){
+fun MyAnimatedNavigation() {
+    val navController = rememberAnimatedNavController()
+    AnimatedNavHost(
+        navController = navController,
+        startDestination = "main"
+        ) {
+        composable("main",
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -300 },
+                    animationSpec = tween(
+                        durationMillis = 600,
+                        easing = FastOutSlowInEasing
+                    )
+                ) +
+                        fadeOut(animationSpec = tween(600))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -300 },
+                    animationSpec = tween(
+                        durationMillis = 600,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeIn(animationSpec = tween(600))
+            }, enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -300 },
+                    animationSpec = tween(
+                        durationMillis = 600,
+                        easing = FastOutSlowInEasing
+                    )
+                ) +
+                        fadeIn(animationSpec = tween(600))
+            }
+        ) {
             MainScreen(navController = navController)
         }
-        composable("detail_screen/{id}"){
+        composable(
+            "detail_screen/{id}",
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { 300 },
+                    animationSpec = tween(
+                        durationMillis = 600,
+                        easing = FastOutSlowInEasing
+                    )
+                ) +
+                        fadeIn(animationSpec = tween(600))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { 300 },
+                    animationSpec = tween(
+                        durationMillis = 600,
+                        easing = FastOutSlowInEasing
+                    )
+                ) +
+                        fadeOut(animationSpec = tween(600))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -300 },
+                    animationSpec = tween(
+                        durationMillis = 600,
+                        easing = FastOutSlowInEasing
+                    )
+                ) +
+                        fadeOut(animationSpec = tween(600))
+            },
+        ) {
             DetailScreen(navController = navController)
         }
 
+
+
     }
 }
+

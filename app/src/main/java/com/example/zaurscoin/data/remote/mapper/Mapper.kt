@@ -9,13 +9,15 @@ import com.example.zaurscoin.domain.model.Coin
 import com.example.zaurscoin.domain.model.CoinList
 
 fun CoinListDto.toCoinList() =
-    CoinList(id, name, symbol, current_price, image, price_change_percentage_24h)
+    CoinList(id, name, symbol, current_price, image, price_change_percentage_24h, market_cap_rank)
 
 fun CoinDto.toCoin() = Coin(id, image, name, symbol, market_data)
 
 fun ChartDto.toChart() = Chart(prices)
 
-fun CoinListDto.toCoinListEntity() =
-    CoinListEntity(id, name, symbol, current_price, image, price_change_percentage_24h)
 
-fun CoinListEntity.toCoinList() = CoinList(id, name, symbol, current_price, image, price_change_percentage_24h)
+fun CoinListDto.toCoinListEntity() =
+    CoinListEntity(id, name, symbol, current_price, image, price_change_percentage_24h, market_cap_rank)
+
+fun CoinListEntity.toCoinList() = CoinList(id, name, symbol, current_price, image, price_change_percentage_24h, market_cap_rank)
+

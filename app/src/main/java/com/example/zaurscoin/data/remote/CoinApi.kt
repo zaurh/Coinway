@@ -12,6 +12,7 @@ interface CoinApi {
     @GET("coins/markets")
     suspend fun getCoins(
         @Query("vs_currency") vs_currency : String = "usd",
+        @Query("per_page") per_page: Int = 250
     ): List<CoinListDto>
 
     @GET("coins/{id}")

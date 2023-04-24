@@ -8,10 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.math.round
 import kotlin.math.roundToInt
+import com.example.zaurscoin.R
 
 @Composable
 fun LineChart(
@@ -21,7 +23,9 @@ fun LineChart(
     endPrice: Double
 ) {
     val spacing = 100f
-    val graphColor = if (startPrice < endPrice) Color.Green else Color.Red
+    val graphColor = if (startPrice < endPrice) colorResource(id = R.color.myGreen) else colorResource(
+        id = R.color.myRed
+    )
     val transparentGraphColor = remember { graphColor.copy(alpha = 0.5f) }
     val upperValue = remember { (data.maxOfOrNull { it.second }?.plus(1))?.roundToInt() ?: 0 }
     val lowerValue = remember { (data.minOfOrNull { it.second }?.toInt() ?: 0) }

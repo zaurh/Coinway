@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.zaurscoin.domain.model.CoinList
 import java.math.RoundingMode
@@ -24,11 +24,15 @@ import com.example.zaurscoin.R
 @Composable
 fun CoinListItem(
     coinList: CoinList,
-    navController: NavController
+    onClick: () -> Unit
 ) {
+    val focus = LocalFocusManager.current
+
     Card(modifier = Modifier.fillMaxSize()) {
+
         Row(Modifier.clickable {
-            navController.navigate("detail_screen/${coinList.id}")
+            focus.clearFocus()
+            onClick()
         }) {
             Row(
                 modifier = Modifier
@@ -44,12 +48,29 @@ fun CoinListItem(
                 )
                 Spacer(modifier = Modifier.size(10.dp))
                 Column {
-                    Text(text = coinList.name, color = Color.White)
-                    Text(
-                        text = coinList.symbol.uppercase(),
-                        color = Color.LightGray,
-                        fontSize = 12.sp
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = coinList.market_cap_rank.toString(),
+                            color = Color.White,
+                            fontSize = 12.sp,
+                            modifier = Modifier
+                                .background(colorResource(id = R.color.search_background))
+                                .padding(start = 3.dp, end = 3.dp)
+                        )
+                        Spacer(modifier = Modifier.size(5.dp))
+                        coinList.name?.let { Text(text = it, color = Color.White) }
+                    }
+
+                    coinList.symbol?.let {
+                        Text(
+                            text = it.uppercase(),
+                            color = Color.LightGray,
+                            fontSize = 12.sp
+                        )
+                    }
+
+
+
                     Text(
                         text = "${coinList.current_price}$",
                         fontWeight = FontWeight.Bold,
@@ -61,18 +82,17 @@ fun CoinListItem(
                     horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
                     Text(
-                        text = "${roundOffDecimal(coinList.price_change_percentage_24h)}%",
-                        color = if (coinList.price_change_percentage_24h > 0)
+                        text = "${coinList.price_change_percentage_24h?.let { roundOffDecimal(it) }}%",
+                        color = if ((coinList.price_change_percentage_24h ?: 2.3) > 0)
                             colorResource(id = R.color.myGreen) else colorResource(id = R.color.myRed)
                     )
                     Spacer(modifier = Modifier.size(5.dp))
 
                     Text(
-                        text = if (coinList.price_change_percentage_24h > 0) "▲" else "▼",
+                        text = if ((coinList.price_change_percentage_24h ?: 2.4) > 0) "▲" else "▼",
                         fontWeight = FontWeight.Bold,
-                        color = if (coinList.price_change_percentage_24h > 0)
+                        color = if ((coinList.price_change_percentage_24h ?: 2.3) > 0)
                             colorResource(id = R.color.myGreen) else colorResource(id = R.color.myRed),
                         fontSize = 22.sp
                     )

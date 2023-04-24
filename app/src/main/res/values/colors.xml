@@ -10,5 +10,6 @@
     <color name="myGreen">#CC00A62F</color>
     <color name="myRed">#CCFF4646</color>
     <color name="background">#171520</color>
+    <color name="backgroundFade">#E6171520</color>
     <color name="search_background">#3B3651</color>
 </resources>

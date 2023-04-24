@@ -8,7 +8,6 @@ import com.example.zaurscoin.data.remote.CoinApi
 import com.example.zaurscoin.data.repository.CoinRepositoryImpl
 import com.example.zaurscoin.domain.repository.CoinRepository
 import com.example.zaurscoin.domain.use_case.CoinListUseCase
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,16 +29,18 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
     @Singleton
     @Provides
-    fun provideRetrofitApi(retrofit: Retrofit): CoinApi{
+    fun provideRetrofitApi(retrofit: Retrofit): CoinApi {
         return retrofit.create(CoinApi::class.java)
     }
 
     //Repository
     @Singleton
     @Provides
-    fun provideRepository(api: CoinApi, db: CoinListDB): CoinRepository = CoinRepositoryImpl(api, db.coinListDao())
+    fun provideRepository(api: CoinApi, db: CoinListDB): CoinRepository =
+        CoinRepositoryImpl(api, db.coinListDao())
 
     @Singleton
     @Provides
@@ -53,7 +54,8 @@ object AppModule {
             app,
             CoinListDB::class.java,
             "database_name"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
+
 
 }

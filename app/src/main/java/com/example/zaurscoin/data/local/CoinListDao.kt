@@ -11,7 +11,10 @@ interface CoinListDao {
     suspend fun insertList(coinListEntity: List<CoinListEntity>)
 
     @Delete
-    suspend fun deleteList(coinListEntity: List<CoinListEntity>)
+    suspend fun delete(coinListEntity: CoinListEntity)
+
+    @Query("delete from coinList")
+    suspend fun deleteList()
 
     @Query("SELECT * FROM coinList")
     suspend fun allLocalCoins():List<CoinListEntity>
