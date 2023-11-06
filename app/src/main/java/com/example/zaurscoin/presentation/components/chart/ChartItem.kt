@@ -1,4 +1,4 @@
-package com.example.zaurscoin.presentation.screens
+package com.example.zaurscoin.presentation.components.chart
 
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
@@ -17,8 +17,8 @@ import com.example.zaurscoin.R
 
 @Composable
 fun LineChart(
-    data: List<Pair<Long, Double>> = emptyList(),
     modifier: Modifier = Modifier,
+    data: List<Pair<Long, Double>> = emptyList(),
     startPrice: Double,
     endPrice: Double
 ) {

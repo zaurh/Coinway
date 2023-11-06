@@ -1,4 +1,4 @@
-package com.example.zaurscoin.presentation.screens
+package com.example.zaurscoin.presentation.screens.coin_detail
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -7,6 +7,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,10 +28,11 @@ import coil.compose.rememberImagePainter
 import com.example.zaurscoin.R
 import com.example.zaurscoin.common.addCommas
 import com.example.zaurscoin.presentation.components.chart.ChartViewModel
-import com.example.zaurscoin.presentation.screens.coin_detail.CoinDetailViewModel
+import com.example.zaurscoin.presentation.components.chart.LineChart
 import java.util.*
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailScreen(
     navController: NavController,
@@ -63,14 +71,15 @@ fun DetailScreen(
                     }
                     Text(text = coinItem.coin?.name ?: "", color = Color.White)
                 }
-
-
-            }, backgroundColor = colorResource(id = R.color.background))
+            }, colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                containerColor = colorResource(id = R.color.background))
+            )
         }
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(it)
                 .background(colorResource(id = R.color.background))
         ) {
 
@@ -115,7 +124,6 @@ fun DetailScreen(
                                 fontSize = 35.sp
                             )
                         }
-                        Divider()
                         Spacer(modifier = Modifier.size(40.dp))
 
                         Row(

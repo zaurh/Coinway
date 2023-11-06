@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zaurscoin.common.Resource
 import com.example.zaurscoin.domain.use_case.ChartUseCase
-import com.example.zaurscoin.domain.use_case.CoinUseCase
-import com.example.zaurscoin.presentation.screens.coin_detail.CoinDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

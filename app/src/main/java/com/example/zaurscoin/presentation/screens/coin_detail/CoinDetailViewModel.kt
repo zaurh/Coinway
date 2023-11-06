@@ -6,9 +6,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zaurscoin.common.Resource
-import com.example.zaurscoin.domain.model.CoinList
-import com.example.zaurscoin.domain.use_case.ChartUseCase
-import com.example.zaurscoin.domain.use_case.CoinListUseCase
 import com.example.zaurscoin.domain.use_case.CoinUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
