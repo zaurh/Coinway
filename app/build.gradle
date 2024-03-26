@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace 'com.example.zaurscoin'
+    namespace 'com.zaurh.coinway'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.zaurscoin"
+        applicationId "com.zaurh.coinway"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -82,7 +82,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 
     //MVVM
-
     implementation "androidx.navigation:navigation-compose:2.5.3"
     implementation "androidx.compose.runtime:runtime-livedata:1.0.0"
 
@@ -101,8 +100,10 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
+    //Animated Navigation
     implementation "com.google.accompanist:accompanist-navigation-animation:0.24.13-rc"
 
+    //Swipe refresh
     implementation "com.google.accompanist:accompanist-swiperefresh:0.24.2-alpha"
 
 
