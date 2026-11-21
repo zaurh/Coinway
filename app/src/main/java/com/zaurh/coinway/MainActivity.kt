@@ -1,120 +1,51 @@
 package com.zaurh.coinway
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
-import androidx.compose.animation.*
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.zaurh.coinway.presentation.screen.coin_detail.DetailScreen
-import com.zaurh.coinway.presentation.screen.main.MainScreen
-import com.zaurh.coinway.ui.theme.CoinwayTheme
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.zaurh.coinway.domain.model.ThemeMode
+import com.zaurh.coinway.presentation.main.MainViewModel
+import com.zaurh.coinway.presentation.navigation.CoinwayRoot
+import com.zaurh.coinway.presentation.theme.CoinwayTheme
+import com.zaurh.coinway.presentation.theme.isDark
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+        splashScreen.setKeepOnScreenCondition { viewModel.themeMode.value == null }
+        enableEdgeToEdge()
+
         setContent {
-            CoinwayTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = colorResource(id = R.color.background)
-                ) {
-                    MyAnimatedNavigation()
-                }
+            val themeMode by viewModel.themeMode.collectAsStateWithLifecycle()
+            val mode = themeMode ?: ThemeMode.System
+            val dark = mode.isDark(isSystemInDarkTheme())
+
+            DisposableEffect(dark) {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { dark },
+                    navigationBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { dark },
+                )
+                onDispose {}
+            }
+
+            CoinwayTheme(themeMode = mode) {
+                CoinwayRoot()
             }
         }
     }
 }
-
-@OptIn(ExperimentalAnimationApi::class)
-@Composable
-fun MyAnimatedNavigation() {
-    val navController = rememberAnimatedNavController()
-    AnimatedNavHost(
-        navController = navController,
-        startDestination = "main"
-        ) {
-        composable("main",
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -300 },
-                    animationSpec = tween(
-                        durationMillis = 600,
-                        easing = FastOutSlowInEasing
-                    )
-                ) +
-                        fadeOut(animationSpec = tween(600))
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -300 },
-                    animationSpec = tween(
-                        durationMillis = 600,
-                        easing = FastOutSlowInEasing
-                    )
-                ) + fadeIn(animationSpec = tween(600))
-            }, enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -300 },
-                    animationSpec = tween(
-                        durationMillis = 600,
-                        easing = FastOutSlowInEasing
-                    )
-                ) +
-                        fadeIn(animationSpec = tween(600))
-            }
-        ) {
-            MainScreen(navController = navController)
-        }
-        composable(
-            "detail_screen/{id}",
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(
-                        durationMillis = 600,
-                        easing = FastOutSlowInEasing
-                    )
-                ) +
-                        fadeIn(animationSpec = tween(600))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(
-                        durationMillis = 600,
-                        easing = FastOutSlowInEasing
-                    )
-                ) +
-                        fadeOut(animationSpec = tween(600))
-            },
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -300 },
-                    animationSpec = tween(
-                        durationMillis = 600,
-                        easing = FastOutSlowInEasing
-                    )
-                ) +
-                        fadeOut(animationSpec = tween(600))
-            },
-        ) {
-            DetailScreen(navController = navController)
-        }
-
-
-
-    }
-}
-

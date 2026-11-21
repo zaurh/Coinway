@@ -1,3 +1,110 @@
 <resources>
     <string name="app_name">Coinway</string>
+
+    <!-- Navigation -->
+    <string name="nav_markets">Markets</string>
+    <string name="nav_watchlist">Watchlist</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Markets -->
+    <string name="search_hint">Search coins</string>
+    <string name="clear_search">Clear search</string>
+    <string name="filter_all">All</string>
+    <string name="filter_gainers">Gainers</string>
+    <string name="filter_losers">Losers</string>
+    <string name="sort_by">Sort by</string>
+    <string name="sort_rank">Rank</string>
+    <string name="sort_price">Price</string>
+    <string name="sort_change">24h change</string>
+    <string name="sort_name">Name</string>
+    <string name="global_market_cap">Market cap</string>
+    <string name="global_volume">24h volume</string>
+    <string name="global_btc_dominance">BTC dominance</string>
+    <string name="no_results_title">No coins found</string>
+    <string name="no_results_body">Nothing matches “%1$s”. Try a different name or symbol.</string>
+    <string name="offline_banner">Couldn\'t refresh. Showing saved prices — tap to retry.</string>
+    <string name="updated_at">Updated %1$s</string>
+
+    <!-- Watchlist -->
+    <string name="watchlist_title">Watchlist</string>
+    <string name="watchlist_empty_title">Your watchlist is empty</string>
+    <string name="watchlist_empty_body">Tap the star on a coin\'s page, or long-press a coin in Markets, to keep an eye on it here.</string>
+    <string name="watchlist_swipe_hint">Swipe a coin to the left to remove it.</string>
+    <string name="watchlist_today">Average today</string>
+    <string name="watchlist_up">▲ %1$d up</string>
+    <string name="watchlist_down">▼ %1$d down</string>
+    <plurals name="watchlist_coins">
+        <item quantity="one">%1$d coin</item>
+        <item quantity="other">%1$d coins</item>
+    </plurals>
+    <string name="watchlist_browse">Browse markets</string>
+    <string name="add_to_watchlist">Add to watchlist</string>
+    <string name="remove_from_watchlist">Remove from watchlist</string>
+    <string name="added_to_watchlist">%1$s added to watchlist</string>
+    <string name="removed_from_watchlist">%1$s removed from watchlist</string>
+
+    <!-- Detail -->
+    <string name="back">Back</string>
+    <string name="share">Share</string>
+    <string name="rank_format">#%1$d</string>
+    <string name="statistics">Statistics</string>
+    <string name="performance">Performance</string>
+    <string name="about_coin">About %1$s</string>
+    <string name="read_more">Read more</string>
+    <string name="show_less">Show less</string>
+    <string name="website">Website</string>
+    <string name="stat_market_cap">Market cap</string>
+    <string name="stat_volume">24h volume</string>
+    <string name="stat_high">24h high</string>
+    <string name="stat_low">24h low</string>
+    <string name="stat_ath">All-time high</string>
+    <string name="stat_atl">All-time low</string>
+    <string name="stat_circulating">Circulating supply</string>
+    <string name="stat_max_supply">Max supply</string>
+    <string name="perf_24h_short">24h</string>
+    <string name="perf_7d_short">7d</string>
+    <string name="perf_30d_short">30d</string>
+    <string name="perf_1y_short">1y</string>
+    <string name="day_range">24h range</string>
+    <string name="range_day">Past 24 hours</string>
+    <string name="range_week">Past week</string>
+    <string name="range_month">Past month</string>
+    <string name="range_quarter">Past 3 months</string>
+    <string name="range_year">Past year</string>
+    <string name="data_attribution">Market data provided by CoinGecko</string>
+    <string name="chart_error">Couldn\'t load the chart</string>
+    <string name="share_text">%1$s (%2$s) is trading at %3$s (%4$s in 24h). Tracked with Coinway: %5$s</string>
+    <string name="from_ath">%1$s from ATH</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_currency">Currency</string>
+    <string name="settings_currency_body">Prices and market data are shown in this currency</string>
+    <string name="settings_about">About</string>
+    <string name="settings_rate">Rate Coinway</string>
+    <string name="settings_rate_body">Enjoying the app? A review helps a lot</string>
+    <string name="settings_share_app">Share Coinway</string>
+    <string name="settings_share_app_body">Send the app to a friend</string>
+    <string name="settings_share_app_text">Track crypto prices with Coinway: %1$s</string>
+    <string name="settings_version">Version</string>
+    <string name="settings_data_source">Market data</string>
+    <string name="settings_data_source_body">Powered by CoinGecko</string>
+    <string name="settings_clear_cache">Clear cached data</string>
+    <string name="settings_clear_cache_body">Removes saved prices. Your watchlist stays.</string>
+    <string name="cache_cleared">Cached data cleared</string>
+
+    <!-- Common -->
+    <string name="retry">Try again</string>
+    <string name="undo">Undo</string>
+    <string name="error_title">Something went wrong</string>
+    <string name="error_network">Couldn\'t reach the server. Check your internet connection.</string>
+    <string name="error_rate_limit">Too many requests right now. Please wait a minute and try again.</string>
+    <string name="error_server">The market data service is unavailable. Please try again later.</string>
+    <string name="error_unknown">Something unexpected happened. Please try again.</string>
+    <string name="not_available">—</string>
 </resources>
